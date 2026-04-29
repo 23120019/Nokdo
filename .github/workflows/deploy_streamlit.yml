@@ -31,13 +31,16 @@ jobs:
   trigger-render-deploy:
     needs: build-push
     runs-on: ubuntu-latest
-    if: ${{ secrets.RENDER_API_KEY != '' && secrets.RENDER_SERVICE_ID != '' }}
     steps:
       - name: Trigger Render deploy
         env:
           RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
           SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID }}
         run: |
+          if [ -z "$RENDER_API_KEY" ] || [ -z "$SERVICE_ID" ]; then
+            echo "Render secrets are missing. Deploy skipped."
+            exit 0
+          fi
           echo "Triggering Render deploy for service $SERVICE_ID"
           curl -X POST \
             -H "Authorization: Bearer $RENDER_API_KEY" \
