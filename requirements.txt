@@ -1,0 +1,11 @@
+requests
+pandas
+websockets
+matplotlib
+streamlit
+streamlit-autorefresh
+scikit-learn
+yfinance
+joblib
+fastapi
+uvicorn[standard]

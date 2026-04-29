@@ -1,0 +1,37 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Vite: dev",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": { "cwd": "${workspaceFolder}/frontend-cloudflare" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "panel": "dedicated", "showReuseMessage": false, "clear": false }
+    },
+    {
+      "label": "Streamlit: run",
+      "type": "shell",
+      "command": "streamlit run streamlit_app.py --server.address 0.0.0.0",
+      "options": { "cwd": "${workspaceFolder}" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "panel": "dedicated", "showReuseMessage": false, "clear": false }
+    },
+    {
+      "label": "Firebase: emulators",
+      "type": "shell",
+      "command": "firebase emulators:start --only functions,auth",
+      "options": { "cwd": "${workspaceFolder}/firebase-backend" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "panel": "dedicated", "showReuseMessage": false, "clear": false }
+    },
+    {
+      "label": "Start All Dev",
+      "dependsOn": ["Vite: dev", "Streamlit: run", "Firebase: emulators"],
+      "dependsOrder": "parallel"
+    }
+  ]
+}

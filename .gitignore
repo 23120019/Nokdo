@@ -1,0 +1,26 @@
+# Node / frontend
+node_modules/
+dist/
+build/
+
+# Python / Streamlit
+__pycache__/
+.streamlit/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/*.code-workspace
