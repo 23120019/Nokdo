@@ -15,15 +15,19 @@ jobs:
           node-version: '18'
       - name: Install firebase-tools
         run: npm install -g firebase-tools
-      - name: Skip deploy when Firebase token is missing
+      - name: Check Firebase token
+        id: check_fb
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         run: |
           if [ -z "$FIREBASE_TOKEN" ]; then
-            echo "FIREBASE_TOKEN is missing. Deploy skipped."
-            exit 0
+            echo "should_deploy=false" >> "$GITHUB_OUTPUT"
+            echo "FIREBASE_TOKEN is missing. Deploy will be skipped."
+          else
+            echo "should_deploy=true" >> "$GITHUB_OUTPUT"
           fi
       - name: Deploy functions
+        if: ${{ steps.check_fb.outputs.should_deploy == 'true' }}
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         run: |
