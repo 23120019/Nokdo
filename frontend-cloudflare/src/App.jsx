@@ -10,10 +10,10 @@ function getDynamicApiBase() {
     return `${currentProtocol}//localhost:5001/fir-demo-project/us-central1/api`;
   }
   
-  // 그 외에는 환경 변수 또는 외부 터널 주소 사용
+  // 그 외에는 같은 origin 아래의 프록시 API 사용
   return (
     import.meta.env.VITE_FIREBASE_API_BASE ||
-    "https://commissions-spent-accessories-feet.trycloudflare.com/fir-demo-project/us-central1/api"
+    new URL("/fir-demo-project/us-central1/api", window.location.origin).toString()
   );
 }
 
@@ -26,11 +26,11 @@ function getDynamicStreamlitUrl() {
     return `${currentProtocol}//localhost:8501`;
   }
   
-  // 그 외에는 환경 변수 또는 외부 터널 주소 사용
+  // 그 외에는 같은 origin 아래의 Streamlit 프록시 사용
   return (
     import.meta.env.VITE_STREAMLIT_URL ||
     import.meta.env.VITE_POST_LOGIN_URL ||
-    "https://commissions-spent-accessories-feet.trycloudflare.com:8501"
+    new URL("/streamlit", window.location.origin).toString()
   );
 }
 
