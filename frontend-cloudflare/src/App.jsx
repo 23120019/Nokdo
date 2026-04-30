@@ -30,7 +30,7 @@ function getDynamicStreamlitUrl() {
   return (
     import.meta.env.VITE_STREAMLIT_URL ||
     import.meta.env.VITE_POST_LOGIN_URL ||
-    "https://est-heading-otherwise-amino.trycloudflare.com"
+    "https://noticed-station-filed-bass.trycloudflare.com:8501"
   );
 }
 
