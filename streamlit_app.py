@@ -484,8 +484,28 @@ def get_presence_api_base():
     if env_override:
         return env_override.rstrip("/")
     
-    # 기본값: 로컬 Firebase 에뮬레이터 사용
-    return "http://127.0.0.1:8355/fir-demo-project/us-central1/api"
+    try:
+        from streamlit.web.server import Server
+        current_server = Server.get_current()
+        if current_server and hasattr(current_server, "_browser_ws"):
+            # 클라이언트의 호스트 정보 (X-Forwarded-For 또는 direct)
+            # Streamlit의 경우 req.host를 통해 접근 가능
+            pass
+    except:
+        pass
+    
+    # 기본값: localhost에서는 localhost 사용, 외부에서는 터널 주소 사용
+    # 환경 변수로 명시적 지정 가능
+    import socket
+    try:
+        hostname = socket.gethostname()
+        if "localhost" in socket.gethostbyname(hostname) or "127.0.0.1" in socket.gethostbyname(hostname):
+            return "http://127.0.0.1:5001/fir-demo-project/us-central1/api"
+    except:
+        pass
+    
+    # 외부 환경: 터널 주소 사용
+    return "https://contributor-bestsellers-chi-longitude.trycloudflare.com/fir-demo-project/us-central1/api"
 
 PRESENCE_API_BASE = get_presence_api_base()
 PRESENCE_TOUCH_INTERVAL_SECONDS = int(os.getenv("STREAMLIT_PRESENCE_TOUCH_INTERVAL_SECONDS", "15"))
