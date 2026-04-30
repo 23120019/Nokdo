@@ -492,11 +492,11 @@ PRESENCE_TOUCH_INTERVAL_SECONDS = int(os.getenv("STREAMLIT_PRESENCE_TOUCH_INTERV
 # 고정 로그인 URL: 프론트엔드 로그인 페이지로 기본값 설정
 # 환경변수 STREAMLIT_FIREBASE_LOGIN_URL로 덮어쓸 수 있다.
 FIREBASE_LOGIN_URL = str(
-    os.getenv("STREAMLIT_FIREBASE_LOGIN_URL", "https://noticed-station-filed-bass.trycloudflare.com")
+    os.getenv("STREAMLIT_FIREBASE_LOGIN_URL", "https://commissions-spent-accessories-feet.trycloudflare.com")
 ).strip()
 # 기본 동작: 사용자를 식별할 수 없으면(쿼리파라미터 또는 세션 없음) Firebase 로그인으로 리다이렉트
-# 기본값은 true (Firebase 로그인 우선)
-STREAMLIT_REDIRECT_IF_NO_USER = str(os.getenv("STREAMLIT_REDIRECT_IF_NO_USER", "1")).strip().lower() in {"1", "true", "yes", "on"}
+# 기본값은 false (명시적으로 STREAMLIT_REDIRECT_IF_NO_USER=1 환경변수로 활성화)
+STREAMLIT_REDIRECT_IF_NO_USER = str(os.getenv("STREAMLIT_REDIRECT_IF_NO_USER", "0")).strip().lower() in {"1", "true", "yes", "on"}
 
 
 def _presence_request(path: str, method: str = "GET", payload=None, timeout_sec: float = 2.5):
