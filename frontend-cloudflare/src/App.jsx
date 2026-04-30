@@ -13,7 +13,7 @@ function getDynamicApiBase() {
   // 그 외에는 환경 변수 또는 외부 터널 주소 사용
   return (
     import.meta.env.VITE_FIREBASE_API_BASE ||
-    "https://ask-operating-instantly-portfolio.trycloudflare.com/fir-demo-project/us-central1/api"
+    "https://contributor-bestsellers-chi-longitude.trycloudflare.com/fir-demo-project/us-central1/api"
   );
 }
 
